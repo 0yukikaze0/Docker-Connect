@@ -1,6 +1,6 @@
 {
   "name": "docker-connect",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Node JS docker connectivity and administration client",
   "main": "DockerConnect.js",
   "scripts": {
