@@ -1,5 +1,5 @@
 /**
-    Quorum-Workbench - Bifrost Network request/response manager
+    Docker-Connect - Docker connectivity client (docker-connect)
     Copyright (C) 2017  Ashfaq Ahmed Shaik
 
     This program is free software: you can redistribute it and/or modify
