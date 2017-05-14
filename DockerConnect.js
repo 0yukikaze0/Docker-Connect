@@ -24,6 +24,7 @@
 * +--------------------------------------------------------------+
 */
 
+var ExecHandler         =   require('./handlers/ExecHandler')
 var ImageHandler        =   require('./handlers/ImageHandler');
 var NetworkHandler      =   require('./handlers/NetworkHandler');
 var ContainerHandler    =   require('./handlers/ContainerHandler');
@@ -31,6 +32,7 @@ var ContainerHandler    =   require('./handlers/ContainerHandler');
 class DockerConnect{
 
     constructor(socketPath){
+        this.exec       =   new ExecHandler(socketPath);
         this.images     =   new ImageHandler(socketPath);
         this.network    =   new NetworkHandler(socketPath);
         this.containers =   new ContainerHandler(socketPath);
