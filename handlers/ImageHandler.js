@@ -40,11 +40,22 @@ class ImageHandler{
      */
     getAllImages() {
         return new Promise((respond, reject) => {
-            let images = [];
             this._bifrost.transmitRequest(Constants.GET,'/images/json')
                 .then(  (response)  => respond(response),
                         (err)       => reject(err) );
         })        
+    }
+
+    buildImage(tag, dockerFilePath) {
+        return new Promise((respond,reject) => {
+            let params = {
+                t : tag,
+                remote : dockerFilePath 
+            }
+            this._bifrost.transmitRequest(Constants.POST, '/build', params)
+                .then(  (response)  => respond(response),
+                        (err)       => reject(err)  ); 
+        });
     }
 }
 
