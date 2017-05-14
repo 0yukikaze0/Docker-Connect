@@ -113,7 +113,7 @@ class ContainerHandler{
      * Starts a container matching the provided name/id
      * @function {startContainer}
      * @param  {string} containerName | Id {Name or Id of the container to start}
-     * @return {Promise} {description}
+     * @return {Promise} 
      */
     startContainer(container) {
         return new Promise((respond,reject) => {
@@ -127,11 +127,39 @@ class ContainerHandler{
      * Stops a container matching the provided name/id
      * @function {stopContainer}
      * @param  {string} containerName | Id {Name or Id of the container to start}
-     * @return {Promise} {description}
+     * @return {Promise} 
      */
     stopContainer(container) {
         return new Promise((respond,reject) => {
-             this._bifrost.transmitRequest(Constants.POST, `/containers/${container}/stop`,{})
+            this._bifrost.transmitRequest(Constants.POST, `/containers/${container}/stop`,{})
+                .then(  (response)  => respond(response),
+                        (err)       => reject(err) );
+        });
+    }
+
+    /**
+     * Removes a stopped container
+     * @function {removeContainer}
+     * @param  {string} containerName | Id {Name or Id of the container to delete}
+     * @return {Promise} 
+     */
+    removeContainer(container) {
+        return new Promise((respond,reject) => {
+            this._bifrost.transmitRequest(Constants.DELETE, `/containers/${container}`,{})
+                .then(  (response)  => respond(response),
+                        (err)       => reject(err) );
+        });
+    }
+
+    /**
+     * Returns a JSON of current active processes in the container
+     * @function {listActiveProcesses}
+     * @param  {string} containerName | Id {Name or Id of the container}
+     * @return {Promise}
+     */
+    listActiveProcesses(container) {
+        return new Promise((respond,reject) => {
+            this._bifrost.transmitRequest(Constants.GET, `/containers/${container}/top`,{})
                 .then(  (response)  => respond(response),
                         (err)       => reject(err) );
         });
