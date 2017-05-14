@@ -96,7 +96,36 @@ class NetworkHandler{
                     }
                 })
         });
-    } 
+    }
+
+    /**
+     * @function {connectToNetwork}
+     * @param  {string} container name | Id   {Name or Id of the container}
+     * @param  {string} networkName {Name of Id of the network}
+     * @return {Promise}
+     */
+    connectToNetwork(container, networkName) {
+        return new Promise((respond,reject) => {
+            this._bifrost.transmitRequest(Constants.POST, `/networks/${networkName}/connect`, {Container:container})
+                .then( (response)   => respond(response),
+                       (err)        => reject(err)  );
+        });
+    }
+
+    /**
+     * @function {disconnectFromNetwork}
+     * @param  {string} container name | Id   {Name or Id of the container}
+     * @param  {string} networkName {Name of Id of the network}
+     * @return {Promise}
+     */
+    disconnectFromNetwork(container, networkName) {
+        return new Promise((respond,reject) => {
+            this._bifrost.transmitRequest(Constants.POST, `/networks/${networkName}/disconnect`, {Container:container})
+                .then( (response)   => respond(response),
+                       (err)        => reject(err)  );
+        });
+    }
+
 }
 
 module.exports = NetworkHandler;
