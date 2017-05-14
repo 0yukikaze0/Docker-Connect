@@ -48,9 +48,9 @@ class ExecHandler{
              * [2] - Start exec instance from [1]
              */
             // [1]
-            this._bifrost.transmitRequest(Constants.POST, `/containers/${container}/exec`)
+            this._bifrost.transmitRequest(Constants.POST, `/containers/${container}/exec`,request)
                 // [2]
-                .then(  (response)  => this.startExecId(JSON.stringify(response)['Id']),
+                .then(  (response)  =>  this.startExecId(response.Id),
                         (err)       =>  reject(err) )
                 .then(  (response)  =>  respond(response),
                         (err)       =>  reject(err) )
@@ -59,7 +59,7 @@ class ExecHandler{
 
     startExecId(execId){
         return new Promise((respond,reject) => {
-            this._bifrost.transmitRequest(Constants.POST, `/exec/${execId}/start`, {})
+            this._bifrost.transmitRequest(Constants.POST, `/exec/${execId}/start`, {Detach:true, Tty:false})
                 .then(  (response)  =>  respond(response),
                         (err)       =>  reject(err))
         });
